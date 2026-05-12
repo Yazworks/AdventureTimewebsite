@@ -65,12 +65,22 @@ body {
   z-index: 5;
 }
 
-.location-card {
+.location-stage {
   position: relative;
-  display: inline-block;
+  height: 70vh;
+  width: 100%;
+  margin-top: 60px;
+}
+
+.location-card {
+  position: absolute;
+  display: block;
   text-decoration: none;
-  color: #fff;
-  transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+.location-img {
+  width: 100%;
+  max-width: none;
 }
 
 .location-card::before {
@@ -88,14 +98,7 @@ body {
   transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
-.location-img {
-  width: 100%;
-  max-width: 280px;
-  height: auto;
-  object-fit: contain;
-  transform-origin: bottom center;
-  transition: transform 0.35s ease, filter 0.35s ease;
-}
+
 
 .location-card:hover .location-img {
   transform: translateY(-18px) scale(1.08) rotateX(8deg);
@@ -107,20 +110,28 @@ body {
   transform: translateX(-50%) scale(1.15);
 }
 
-.location-card span {
-  display: block;
-  margin-top: 0.5rem;
-  font-size: 1.3rem;
-  font-weight: bold;
-  text-shadow: 2px 2px 0 #000;
+
+
+.treehouse-card {
+  left: 0vw;
+  bottom: 18vh;
+  width: 32vw;
+  z-index: 2;
 }
 
-.featured-location .location-img {
-  max-width: 340px;
+.candy-card {
+  left: 55%;
+  bottom: 6vh;
+  width: 42vw;
+  transform: translateX(-50%);
+  z-index: 5;
 }
 
-.featured-location:hover .location-img {
-  transform: translateY(-24px) scale(1.12);
+.cragdor-card {
+  right: -6vw;
+  bottom: 17vh;
+  width: 32vw;
+  z-index: 2;
 }
 
 @keyframes slideLeft {
@@ -175,4 +186,91 @@ button {
   width: 100vw;
   height: 55vh;
   display: block;
+}
+
+/* hover mini scroll labels */
+.hover-scroll {
+  position: absolute;
+  left: 50%;
+  bottom: -20px;
+  width: 360px;
+  height: 110px;
+  transform: translateX(-50%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 30;
+}
+
+.hover-open-scroll {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: -60px;
+  opacity: 0;
+}
+
+.hover-roll {
+  position: absolute;
+  width: 105px;
+  top: 12px;
+  z-index: 2;
+}
+
+.left-roll {
+  left: 125px;
+}
+
+.right-roll {
+  right: 125px;
+  transform: scaleX(-1);
+}
+
+.location-card:hover .hover-scroll {
+  opacity: 1;
+}
+
+.location-card:hover .hover-open-scroll {
+  animation: revealMiniScroll 0.45s ease forwards 0.15s;
+}
+
+.location-card:hover .left-roll {
+  animation: miniSlideLeft 0.55s ease forwards;
+}
+
+.location-card:hover .right-roll {
+  animation: miniSlideRight 0.55s ease forwards;
+}
+
+@keyframes miniSlideLeft {
+  from {
+    left: 125px;
+  }
+
+  to {
+    left: -43px;
+  }
+}
+
+@keyframes miniSlideRight {
+  from {
+    right: 125px;
+    transform: scaleX(-1);
+  }
+
+  to {
+    right: -35px;
+    transform: scaleX(-1);
+  }
+}
+
+@keyframes revealMiniScroll {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
