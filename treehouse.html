@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Treehouse - BMO</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <h1>Treehouse</h1>
+
+  <div id="buttons">
+    <a href="index.html"><button>Back to Land of Ooo</button></a>
+    <button onclick="loadModel('assets/models/BMOwave.glb')">BMO Wave</button>
+    <button onclick="loadModel('assets/models/BMOangry.glb')">BMO Angry</button>
+  </div>
+
+  <canvas id="threeCanvas"></canvas>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r106/three.min.js"></script>
+  <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/2666677/OrbitControls.js"></script>
+  <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/2666677/GLTFLoader.js"></script>
+
+  <script>
+    const pageConfig = {
+      type: "model",
+      background: "assets/images/treehouse-background.jpg",
+      startModel: "BMOwave.glb"
+    };
+  </script>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
