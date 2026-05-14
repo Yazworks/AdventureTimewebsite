@@ -1,0 +1,55 @@
+{
+  "about": {
+    "projectConcept": {
+      "title": "Project Concept",
+      "text": "This project is inspired by my own interest in adventure time, and the vast world allowing for every type of scenario and style to co exist within the show, this lends itself pretty nicely to a creative project like this. Set across three differing locations: the Treehouse, Candy Kingdom, and Mount Cragdor. Each location presents a different animated 3D model exported from Blender and displayed through Three.js. The aim was to create a stylised fantasy website which combines 3D animation, themed navigation, sound, imaging, lighting controls, and interactive model behaviour."
+    },
+    "designChoices": {
+      "title": "Design Choices",
+      "text": "The visual design is based primarily upon a storybook interpretation of the Land of Ooo. Which in of itself is very saturated, hand drawn, and cartoon based. I used scroll graphics, parchment textures, bright location cut-outs, and themed backgrounds to give each page its own identity while keeping the overall website consistent. Bootstrap was used for navigation, layout, offcanvas menus, and footers, while custom CSS was used to create the scroll animations, hover effects, image-based buttons, as well as page-specific styling.\n\n Canva was a primary assist to this project, helping to create the visuals which I would use primarily for the scrolls. The lettering of which was added manually through cutting and pasting a template of the letters found online. Canva also provided cutting and transparency properties which I used to finalise the 2D assets in this site to help blend the dimensional diversity present within this site. The backgrounds for the 3 sites were all found online, through differing portfolios also inspired by adventure time, and are referenced in the references. "
+    },
+    "modellingWorkflow": {
+        "title": "3D Modelling Workflow",
+        "text": "The 3D modelling was made in Blender, and so were the respective animations.\n\nA few mistakes had occurred when creating the initial concepts of the models, such as how I had created BMO with a newer Blender version which wouldn’t render on my weak laptop, ultimately moving it to the lab computers which couldn’t support this new Blender file. Resulting in starting again, I had used skin and single vert for BMO and Peppermint Butler’s arms, however those were not exported or supported in the image based GLB files.\n\nBMO’s model is directly inspired by CUBE ARMY’s YouTube tutorial, however the other 2 models were created with no assistance or tutorials, as I had formed an intuitive understanding through the labs and BMO’s model on how I could manipulate shapes to build more complicated designs.\n\nModifiers were used, primarily the subdivision surface for the extensive cylinders, as well as Boolean functions to carve indentations into the models. Texturing was added as well as lighting, however these did not translate and animations had to be re-implemented through JavaScript code.\n\nCore animation technique and movement had been implemented in Blender using keyframes. Rotation and adjusting each of the positions, this included even the usage of set frames to contort meshes mid animation."
+    },
+    "javascriptInteraction": {
+        "title": "JavaScript Interaction",
+        "text": "JavaScript was used to make the site feel more interactive than a basic 3D model viewer. I used Three.js documentation to understand how GLB models, animation clips, sprites, materials, and audio could be controlled in the browser. The site includes custom material changes, such as BMO’s face changing colour during angry mode and the Enchiridion gems using emissive colours to create a glowing sequence.\n\nPeppermint Butler’s spell effect uses Three.js sprites with transparent materials to create purple smoke, while the Enchiridion uses timed material emission changes so the gems glow in sequence. Sound effects are also triggered through user interaction, which avoids browser autoplay issues and makes the animation buttons feel more responsive."
+    },
+    "testing": {
+        "title": "Testing and Publishing",
+        "text": "Testing was carried out throughout the development of the project by checking each page in the browser, using the console to identify errors, and gathering informal feedback from friends. This feedback influenced the design direction of the project, especially after the original idea focused too heavily on models only. As a result, I added a stronger mixture of 3D models, 2D cut-out images, scroll graphics, themed backgrounds, and interface elements to make the site feel more complete and visually connected to Adventure Time.\n\nFor publishing and evidence, I created a GitHub repository for the project files, prepared a OneDrive folder for supporting assets and larger files, and uploaded the required project folder to Canvas for submission."
+    },
+    "deeperUnderstanding": {
+        "title": "Deeper Understanding / Originality Statements",
+        "text": "This project demonstrates deeper understanding through the way different technologies were combined to create a complete interactive 3D web experience. Instead of only displaying static models, the site uses JavaScript to control animation playback, trigger sound effects, change materials, create smoke and glow effects, and respond to user input across multiple pages.\n\nA key part of the project was making the code reusable. The website uses one shared JavaScript file with page-specific configuration objects, allowing each page to load its own background, starting model, controls, and effects without repeating the same Three.js setup. This made the project easier to expand from one model page into several themed locations.\n\nThe project also shows deeper technical experimentation through features such as sprite-based smoke for Peppermint Butler, sequential emissive gem effects for the Enchiridion, BMO’s material colour change, dat.GUI lighting controls, JSON-powered About page content, accessibility controls, and interaction-triggered audio. These features show an understanding of how 3D content, interface design, media, and user interaction can work together inside a web application.\n\nStatement of Originality: This project was developed for this assignment. The website structure, JavaScript interactions, custom styling, 3D model integration, animations, and themed user interface were created and assembled by me. The project is directly inspired by Adventure Time, and any external references, tutorials, or source materials used for inspiration or research have been acknowledged in the references section."
+    },
+    "references": {
+        "title": "References:",
+        "text": "Adventure Time Wiki. (2026). BMO. Available at: https://adventuretime.fandom.com/wiki/BMO\n\nAdventure Time Wiki. (2026). Peppermint Butler. Available at: https://adventuretime.fandom.com/wiki/Peppermint_Butler\n\nAdventure Time Wiki. (2026). The Enchiridion. Available at: https://adventuretime.fandom.com/wiki/The_Enchiridion_(book)\n\nWikipedia. (2026). Adventure Time. Available at: https://en.wikipedia.org/wiki/Adventure_Time\n\nAdventure Time Official. (2026). Official Instagram page. Available at: https://www.instagram.com/advtimeofficial/\n\nThree.js. (n.d.). Object3D documentation. Available at: https://threejs.org/docs/#api/en/core/Object3D\n\nThree.js. (n.d.). GLTFLoader documentation. Available at: https://threejs.org/docs/#examples/en/loaders/GLTFLoader\n\nThree.js. (n.d.). Animation system manual. Available at: https://threejs.org/manual/#en/animation-system\n\nThree.js. (n.d.). Audio documentation. Available at: https://threejs.org/docs/#api/en/audio/Audio\n\nBootstrap. (n.d.). Navbar component documentation. Available at: https://getbootstrap.com/docs/4.0/components/navbar/\n\nBootstrap. (n.d.). Buttons component documentation. Available at: https://getbootstrap.com/docs/4.0/components/buttons/\n\nBootstrap. (n.d.). Collapse component documentation. Available at: https://getbootstrap.com/docs/4.0/components/collapse/\n\nBootstrap. (n.d.). Grid system documentation. Available at: https://getbootstrap.com/docs/4.0/layout/grid/\n\nHatton, B. (2022). Dungeon Train. Itch.io. Available at: https://brennanhatton.itch.io/dungeontrain\n\nSteam Community. (2024). Adventure Time community workshop reference. Available at: https://steamcommunity.com/sharedfiles/filedetails/?id=3288918486\n\nBittner, M. (n.d.). 3D artwork reference. ArtStation. Available at: https://bittner.artstation.com/projects/3kG2Y\n\nCUBE ARMY. (2024). Blender BMO tutorial. YouTube. Available at: https://www.youtube.com/watch?v=H4XbKQhT4u4&t=606s"
+    }
+  },
+
+  "models": [
+    {
+      "title": "BMO Wave",
+      "description": "Set frame usage to manipulate arm, and rotation loop to keep this looking seemless."
+    },
+    {
+      "title": "BMO Angry",
+      "description": "Set frames for mouth, appearing mshes mid animation, and material change through Javascript."
+    },
+    {
+      "title": "Peppermint Butler",
+      "description": "Set frames on eyes to create 'dart eyes', leviation and limb movement through traditional blender movement and rotation mechanics, mist through javascript effects."
+    },
+    {
+      "title": "Enchiridion Shake",
+      "description": "Conintual remodeling to detatch falling papers and have their animation play in parallel while complimenting main shake animation."
+    },
+    {
+      "title": "Enchiridion Open",
+      "description": "Sound playing over of official adventure time audio, iterative function to target the subsequent materials and ceate emission installed."
+    }
+  ]
+}

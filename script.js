@@ -4,21 +4,21 @@ let currentModel;
 let actions = [];
 let params;
 let lights;
+let currentAudio = null;
 
-// Run when page loads
 window.addEventListener("load", function () {
 
-  // If this is the index/home page, use the Land of Ooo background
   if (pageConfig.type === "home") {
     setPageBackground("assets/BGs/LandofOOO.jpg");
   }
 
-  // If this is a model page, use that page's chosen background
   if (pageConfig.type === "model") {
     setPageBackground(pageConfig.background);
     init3D();
     animate();
   }
+
+  loadSiteContent();
 });
 
 // Background through JavaScript
@@ -199,17 +199,20 @@ function showToast(message) {
 
 function loadBmoWave() {
   loadModel("assets/models/BMOwave.glb", true);
+  playSound("assets/sounds/BMOHi.mp3", 0.8, false);
   showToast("BMO Wave loaded");
 }
 
 function loadBmoAngry() {
   loadModel("assets/models/BMOangry.glb", true);
+  playSound("assets/sounds/BMOangrysound.mp3", 0.8, false);
   showToast("BMO Angry Mode loaded");
 
   setTimeout(function () {
     tintBmoFaceRed();
   }, 500);
 }
+
 
 function setCameraFront() {
   camera.position.set(0, 2, 5);
@@ -350,6 +353,7 @@ function tintBmoFaceRed() {
 
 function loadPeppermintSpell() {
   loadModel("assets/models/peppermintbutlerwitch.glb", true);
+  playSound("assets/sounds/Peppermintspell.mp3", 0.8, false);
   activatePurpleSpellLighting();
   createPurpleMist();
   showToast("Peppermint Butler casts a spell");
@@ -477,17 +481,14 @@ function loadEnchiridionShake() {
 }
 
 function loadEnchiridionOpen() {
-  loadModel("assets/models/emchiredionopen.glb", false);
-  showToast("The gems begin to glow");
+  loadModel("assets/models/emchiredionopen.glb", true);
+  playSound("assets/sounds/Enchiridionopen.mp3", 0.8, false);
+  showToast("The Enchiridion opens");
 
   setTimeout(function () {
-    glowEnchiridionGems(function () {
-      playAnimation();
-      showToast("The Enchiridion opens");
-    });
-  }, 500);
+    glowEnchiridionGems();
+  }, 10000);
 }
-
 function glowEnchiridionGems() {
   if (!currentModel) {
     console.warn("No model loaded for gem glow.");
@@ -611,11 +612,279 @@ function glowSingleGem(mat) {
   }, 800);
 }
 
-function loadEnchiridionOpen() {
-  loadModel("assets/models/emchiredionopen.glb", true);
-  showToast("The Enchiridion opens");
 
-  setTimeout(function () {
-    glowEnchiridionGems();
-  }, 2500);
+
+let aboutModelIndex = 0;
+
+const aboutModels = [
+  {
+    title: "BMO Wave",
+    description: "Description placeholder.",
+    path: "assets/models/BMOwave.glb"
+  },
+  {
+    title: "BMO Angry",
+    description: "Description placeholder.",
+    path: "assets/models/BMOangry.glb"
+  },
+  {
+    title: "Peppermint Butler",
+    description: "Description placeholder.",
+    path: "assets/models/peppermintbutlerwitch.glb"
+  },
+  {
+    title: "Enchiridion Shake",
+    description: "Description placeholder.",
+    path: "assets/models/emchiredionshake.glb"
+  },
+  {
+    title: "Enchiridion Open",
+    description: "Description placeholder.",
+    path: "assets/models/emchiredionopen.glb"
+  }
+];
+
+window.addEventListener("load", function () {
+  if (document.body.classList.contains("about-body")) {
+    setupAboutScrollBlocks();
+    updateAboutModelText();
+  }
+});
+
+function setupAboutScrollBlocks() {
+  const blocks = document.querySelectorAll(".scroll-float");
+
+  const observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    },
+    {
+      threshold: 0.18
+    }
+  );
+
+  blocks.forEach(function (block) {
+    observer.observe(block);
+  });
+
+  window.addEventListener("scroll", function () {
+    blocks.forEach(function (block) {
+      if (!block.classList.contains("visible")) return;
+
+      const rect = block.getBoundingClientRect();
+      const movement = rect.top * -0.018;
+
+      block.style.transform = `translateY(${movement}px)`;
+    });
+  });
 }
+
+function updateAboutModelText() {
+  const model = aboutModels[aboutModelIndex];
+
+  const title = document.getElementById("aboutModelTitle");
+  const description = document.getElementById("aboutModelDescription");
+
+  if (title) {
+    title.innerText = model.title;
+  }
+
+  if (description) {
+    if (loadedSiteContent && loadedSiteContent.models && loadedSiteContent.models[aboutModelIndex]) {
+      description.innerText = loadedSiteContent.models[aboutModelIndex].description;
+    } else {
+      description.innerText = model.description;
+    }
+  }
+}
+
+function showAboutModel(index) {
+  aboutModelIndex = index;
+
+  if (aboutModelIndex < 0) {
+    aboutModelIndex = aboutModels.length - 1;
+  }
+
+  if (aboutModelIndex >= aboutModels.length) {
+    aboutModelIndex = 0;
+  }
+
+  updateAboutModelText();
+
+  const model = aboutModels[aboutModelIndex];
+
+  if (model.title === "BMO Angry") {
+    loadBmoAngry();
+  } else if (model.title === "BMO Wave") {
+    loadBmoWave();
+  } else if (model.title === "Peppermint Butler") {
+    loadPeppermintSpell();
+  } else if (model.title === "Enchiridion Shake") {
+    loadEnchiridionShake();
+  } else if (model.title === "Enchiridion Open") {
+    loadEnchiridionOpen();
+  } else {
+    loadModel(model.path, true);
+  }
+}
+function nextAboutModel() {
+  showAboutModel(aboutModelIndex + 1);
+}
+
+function previousAboutModel() {
+  showAboutModel(aboutModelIndex - 1);
+}
+
+function playSound(soundPath, volume = 0.7, loop = false) {
+  if (currentAudio && !currentAudio.paused) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+  }
+
+  currentAudio = new Audio(soundPath);
+  currentAudio.volume = volume;
+  currentAudio.loop = loop;
+  currentAudio.muted = audioMuted;
+
+  currentAudio.play().catch(function (error) {
+    console.warn("Sound could not play automatically:", error);
+  });
+}
+
+let backgroundMusic = null;
+let musicPlaying = false;
+
+function playBackgroundMusic() {
+  if (!backgroundMusic) {
+    backgroundMusic = new Audio("assets/sounds/ComeAlongWithMe.mp3");
+    backgroundMusic.volume = 0.35;
+    backgroundMusic.loop = true;
+    backgroundMusic.muted = audioMuted;
+  }
+
+  if (musicPlaying) {
+    backgroundMusic.pause();
+    musicPlaying = false;
+  } else {
+    backgroundMusic.play().then(function () {
+      musicPlaying = true;
+    }).catch(function (error) {
+      console.warn("Music could not play:", error);
+    });
+  }
+}
+
+let loadedSiteContent = null;
+
+function loadSiteContent() {
+  fetch("assets/data/siteContent.json")
+    .then(function (response) {
+      if (!response.ok) {
+        throw new Error("Could not load JSON content");
+      }
+
+      return response.json();
+    })
+    .then(function (data) {
+      loadedSiteContent = data;
+
+      if (document.body.classList.contains("about-body")) {
+        applyAboutJsonContent();
+      }
+    })
+    .catch(function (error) {
+      console.warn("JSON content failed to load:", error);
+    });
+}
+
+function applyAboutJsonContent() {
+  if (!loadedSiteContent || !loadedSiteContent.about) return;
+
+  const about = loadedSiteContent.about;
+
+  setTextContent("projectConceptTitle", about.projectConcept.title);
+  setTextContent("projectConceptText", about.projectConcept.text);
+
+  setTextContent("designChoicesTitle", about.designChoices.title);
+  setTextContent("designChoicesText", about.designChoices.text);
+
+  setTextContent("modellingWorkflowTitle", about.modellingWorkflow.title);
+  setTextContent("modellingWorkflowText", about.modellingWorkflow.text);
+
+  setTextContent("javascriptInteractionTitle", about.javascriptInteraction.title);
+  setTextContent("javascriptInteractionText", about.javascriptInteraction.text);
+
+  setTextContent("testingTitle", about.testing.title);
+  setTextContent("testingText", about.testing.text);
+
+  setTextContent("deeperUnderstandingTitle", about.deeperUnderstanding.title);
+  setTextContent("deeperUnderstandingText", about.deeperUnderstanding.text);
+
+  setTextContent("referencesTitle", about.references.title);
+  setTextContent("referencesText", about.references.text);
+}
+
+function setTextContent(elementId, text) {
+  const element = document.getElementById(elementId);
+
+  if (element) {
+    element.innerText = text;
+  }
+}
+
+
+let reduceMotionOn = false;
+let highContrastOn = false;
+let audioMuted = false;
+
+function toggleReduceMotion() {
+  reduceMotionOn = !reduceMotionOn;
+
+  document.body.classList.toggle("reduce-motion", reduceMotionOn);
+
+  if (reduceMotionOn && mixer) {
+    mixer.timeScale = 0.4;
+  }
+
+  if (!reduceMotionOn && mixer) {
+    mixer.timeScale = 1;
+  }
+
+  showToastSafe(reduceMotionOn ? "Reduced motion on" : "Reduced motion off");
+}
+
+function toggleHighContrast() {
+  highContrastOn = !highContrastOn;
+
+  document.body.classList.toggle("high-contrast", highContrastOn);
+
+  showToastSafe(highContrastOn ? "High contrast on" : "High contrast off");
+}
+
+function toggleMuteAudio() {
+  audioMuted = !audioMuted;
+
+  if (currentAudio) {
+    currentAudio.muted = audioMuted;
+  }
+
+  if (backgroundMusic) {
+    backgroundMusic.muted = audioMuted;
+  }
+
+  showToastSafe(audioMuted ? "Audio muted" : "Audio unmuted");
+}
+
+function showToastSafe(message) {
+  if (typeof showToast === "function") {
+    showToast(message);
+  } else {
+    console.log(message);
+  }
+}
+
+

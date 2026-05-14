@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>About - Land of Ooo 3D App</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+</head>
+
+<body class="about-body">
+
+  <nav class="navbar navbar-expand-lg navbar-dark treehouse-nav">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="index.html">Land of Ooo</a>
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#aboutNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="aboutNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="treehouse.html">Treehouse</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="candykingdom.html">Candy Kingdom</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="mountcragdor.html">Mount Cragdor</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="about-hero">
+    <div class="container text-center">
+      <img
+        src="assets/images/AboutUsScroll.png"
+        alt="About This 3D App"
+        class="about-title-scroll">
+    </div>
+  </header>
+
+  <main class="container about-content">
+
+    <section class="about-block about-block-blue scroll-float">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-6">
+          <h2 id="projectConceptTitle">Project Concept</h2>
+          <p id="projectConceptText">
+            Text
+          </p>
+        </div>
+
+        <div class="col-lg-6">
+          <img
+            src="assets/images/Adventure_Time_-_Title_card.png"
+            alt="Adventure Time visual inspiration"
+            class="about-section-img">
+        </div>
+      </div>
+    </section>
+
+    <section class="about-block about-block-pink scroll-float">
+      <div class="row align-items-center flex-lg-row-reverse g-4">
+        <div class="col-lg-6">
+          <h2 id="designChoicesTitle">Design Choices</h2>
+          <p id="designChoicesText">
+            Text
+          </p>
+        </div>
+
+        <div class="col-lg-6">
+          <img
+            src="assets/images/Designscreenshot.png"
+            alt="Website design screenshot"
+            class="about-section-img">
+        </div>
+      </div>
+    </section>
+
+    <section class="about-block about-block-green scroll-float">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-6">
+          <h2 id="modellingWorkflowTitle">3D Modelling Workflow</h2>
+          <p id="modellingWorkflowText">
+            Text
+          </p>
+        </div>
+
+        <div class="col-lg-6">
+          <img
+            src="assets/images/3Dmodelling.png"
+            alt="Blender modelling process"
+            class="about-section-img">
+        </div>
+      </div>
+    </section>
+
+    <section class="about-block about-block-purple scroll-float">
+      <div class="row align-items-center flex-lg-row-reverse g-4">
+        <div class="col-lg-6">
+          <h2 id="javascriptInteractionTitle">JavaScript Interaction</h2>
+          <p id="javascriptInteractionText">
+            Text
+          </p>
+        </div>
+
+        <div class="col-lg-6">
+          <img
+            src="assets/images/Javascriptexamples.png"
+            alt="JavaScript interaction examples"
+            class="about-section-img">
+        </div>
+      </div>
+    </section>
+
+    <section class="about-block about-block-gold scroll-float">
+      <h2 class="text-center mb-4">Model Showcase</h2>
+
+      <div class="model-showcase">
+
+        <button class="showcase-arrow" onclick="previousAboutModel()">
+          ‹
+        </button>
+
+        <div class="about-showcase-viewer">
+          <h3 id="aboutModelTitle">BMO Wave</h3>
+
+          <div id="gui-container"></div>
+
+          <canvas id="threeCanvas"></canvas>
+        </div>
+
+        <button class="showcase-arrow" onclick="nextAboutModel()">
+          ›
+        </button>
+
+      </div>
+
+      <p class="text-center mt-3" id="aboutModelDescription">
+        Text
+      </p>
+    </section>
+
+    <section class="about-block about-block-orange scroll-float">
+      <h2 id="testingTitle">Testing</h2>
+
+      <p id="testingText">
+        Text
+      </p>
+
+      <div class="table-responsive">
+        <table class="table table-bordered about-table">
+
+          <thead>
+              <tr>
+                <th>Tested Feature</th>
+                <th>Issue Found</th>
+                <th>Change Made</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Model file paths</td>
+              <td>Some models did not appear because the file paths were incomplete, misspelled, or did not match the actual folder structure.</td>
+              <td>I changed the model loading system to use full paths such as assets/models/BMOwave.glb and checked the exact spelling of each file.</td>
+            </tr>
+
+            <tr>
+              <td>Animation playback</td>
+              <td>Animations were playing automatically when the model page first loaded.</td>
+              <td>I updated the loadModel function with an autoPlay option so animations only trigger when the user clicks a button.</td>
+            </tr>
+
+            <tr>
+              <td>Duplicate canvas issue</td>
+              <td>The page displayed a strange duplicated background/scene because there were two canvas elements with the same ID.</td>
+              <td>I removed the duplicate canvas and kept a single threeCanvas element for the Three.js renderer.</td>
+            </tr>
+
+            <tr>
+              <td>Lighting GUI</td>
+              <td>The screen went black when the dat.GUI lighting panel was added because the GUI container was missing or the renderer setup was in the wrong order.</td>
+              <td>I added the gui-container element, checked the script order, and corrected the renderer setup so the lighting GUI worked with the Three.js scene.</td>
+            </tr>
+
+            <tr>
+              <td>Peppermint Butler spell effect</td>
+              <td>The first purple mist effect looked like small dots rather than smoke.</td>
+              <td>I replaced the particle effect with larger transparent Three.js sprite clouds to make the spell effect look more like magical smoke.</td>
+            </tr>
+
+            <tr>
+              <td>Enchiridion gem effect</td>
+              <td>The gem glow originally appeared too early and used one generic yellow colour.</td>
+              <td>I delayed the glow effect and assigned individual emissive colours to the gem materials so they glow in sequence.</td>
+            </tr>
+
+            <tr>
+              <td>Audio playback</td>
+              <td>One of the sound effects was not playing correctly because I had accidentally created duplicate JavaScript functions, meaning one version overrode the other and the sound call was lost.</td>
+              <td>I removed the duplicate function and kept one final version that loads the model, triggers the animation, plays the correct MP3 file, and then runs any extra effects.</td>
+            </tr>
+
+            <tr>
+              <td>Wireframe toggle</td>
+              <td>The wireframe mode caused some materials and faces to display incorrectly because the first version assumed each mesh only had one material.</td>
+              <td>I updated the wireframe function so it checks whether a mesh has a single material or an array of materials before applying wireframe mode.</td>
+            </tr>
+
+            <tr>
+              <td>JSON content loading</td>
+              <td>The About page placeholders were not updating because some text was still being pulled from hardcoded JavaScript values instead of the JSON file.</td>
+              <td>I added the correct element IDs in the HTML and updated the JavaScript so the About page text and model descriptions could be loaded from JSON properly.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="about-block about-block-red scroll-float">
+      <h2 id="deeperUnderstandingTitle">Deeper Understanding Statement</h2>
+      <p id="deeperUnderstandingText">
+        Text
+      </p>
+    </section>
+
+    <section class="about-block about-block-dark scroll-float">
+      <h2 id="referencesTitle">References</h2>
+      <p id="referencesText">
+        Text
+      </p>
+    </section>
+
+  </main>
+
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="bmoToast" class="toast text-bg-dark border-0">
+      <div class="toast-body" id="toastMessage">
+        Model loaded!
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r106/three.min.js"></script>
+  <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/2666677/OrbitControls.js"></script>
+  <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/2666677/GLTFLoader.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js"></script>
+
+  <script>
+    const pageConfig = {
+      type: "model",
+      background: "assets/BGs/BackgroundAboutUs.jpg",
+      startModel: "assets/models/BMOwave.glb",
+      cameraPosition: [0, 2, 5]
+    };
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
