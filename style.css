@@ -65,12 +65,22 @@ body {
   z-index: 5;
 }
 
-.location-card {
+.location-stage {
   position: relative;
-  display: inline-block;
+  height: 70vh;
+  width: 100%;
+  margin-top: 60px;
+}
+
+.location-card {
+  position: absolute;
+  display: block;
   text-decoration: none;
-  color: #fff;
-  transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+.location-img {
+  width: 100%;
+  max-width: none;
 }
 
 .location-card::before {
@@ -88,14 +98,7 @@ body {
   transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
-.location-img {
-  width: 100%;
-  max-width: 280px;
-  height: auto;
-  object-fit: contain;
-  transform-origin: bottom center;
-  transition: transform 0.35s ease, filter 0.35s ease;
-}
+
 
 .location-card:hover .location-img {
   transform: translateY(-18px) scale(1.08) rotateX(8deg);
@@ -107,20 +110,28 @@ body {
   transform: translateX(-50%) scale(1.15);
 }
 
-.location-card span {
-  display: block;
-  margin-top: 0.5rem;
-  font-size: 1.3rem;
-  font-weight: bold;
-  text-shadow: 2px 2px 0 #000;
+
+
+.treehouse-card {
+  left: 0vw;
+  bottom: 18vh;
+  width: 32vw;
+  z-index: 2;
 }
 
-.featured-location .location-img {
-  max-width: 340px;
+.candy-card {
+  left: 55%;
+  bottom: 6vh;
+  width: 42vw;
+  transform: translateX(-50%);
+  z-index: 5;
 }
 
-.featured-location:hover .location-img {
-  transform: translateY(-24px) scale(1.12);
+.cragdor-card {
+  right: -6vw;
+  bottom: 17vh;
+  width: 32vw;
+  z-index: 2;
 }
 
 @keyframes slideLeft {
@@ -171,8 +182,436 @@ button {
   cursor: pointer;
 }
 
+
+
+/* hover mini scroll labels */
+.hover-scroll {
+  position: absolute;
+  left: 50%;
+  bottom: -20px;
+  width: 360px;
+  height: 110px;
+  transform: translateX(-50%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 30;
+}
+
+.hover-open-scroll {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: -60px;
+  opacity: 0;
+}
+
+.hover-roll {
+  position: absolute;
+  width: 105px;
+  top: 12px;
+  z-index: 2;
+}
+
+.left-roll {
+  left: 125px;
+}
+
+.right-roll {
+  right: 125px;
+  transform: scaleX(-1);
+}
+
+.location-card:hover .hover-scroll {
+  opacity: 1;
+}
+
+.location-card:hover .hover-open-scroll {
+  animation: revealMiniScroll 0.45s ease forwards 0.15s;
+}
+
+.location-card:hover .left-roll {
+  animation: miniSlideLeft 0.55s ease forwards;
+}
+
+.location-card:hover .right-roll {
+  animation: miniSlideRight 0.55s ease forwards;
+}
+
+@keyframes miniSlideLeft {
+  from {
+    left: 125px;
+  }
+
+  to {
+    left: -43px;
+  }
+}
+
+@keyframes miniSlideRight {
+  from {
+    right: 125px;
+    transform: scaleX(-1);
+  }
+
+  to {
+    right: -35px;
+    transform: scaleX(-1);
+  }
+}
+
+@keyframes revealMiniScroll {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+
+
+
+.treehouse-body {
+  background-image: url("assets/images/InsideHouse.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.treehouse-nav {
+  background: rgba(20, 20, 20, 0.55);
+  backdrop-filter: blur(8px);
+}
+
+.treehouse-ui {
+  position: relative;
+  min-height: calc(100vh - 56px);
+  overflow: hidden;
+}
+
+.treehouse-title-box {
+  position: absolute;
+  top: -65px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+
+  width: 100%;
+  text-align: center;
+
+  color: white;
+  text-shadow: 3px 3px 0 #000;
+}
+
+.treehouse-title-scroll {
+  width: 420px;
+  max-width: 80vw;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.treehouse-title-box p {
+  margin-top: -50px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+}
+
 #threeCanvas {
   width: 100vw;
-  height: 55vh;
+  height: calc(100vh - 56px);
   display: block;
+}
+
+.side-controls {
+  position: absolute;
+  left: 30px;
+  top: 230px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+
+
+@media (max-width: 768px) {
+  .treehouse-title-box {
+    left: 20px;
+    top: 20px;
+  }
+
+  .treehouse-title-box h1 {
+    font-size: 2.8rem;
+  }
+
+  .side-controls {
+    top: auto;
+    bottom: 180px;
+    left: 50%;
+    transform: translateX(-50%);
+    flex-direction: row;
+  }
+
+  .bmo-info-card {
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    width: auto;
+  }
+}
+
+.image-control-btn {
+  width: 350px;
+  height: 120px;
+
+  border: none;
+  outline: none;
+  box-shadow: none;
+
+  background-image: url("assets/images/BmoSnail.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+
+  color: #3b2412;
+  font-weight: bold;
+  font-size: 1rem;
+  text-shadow: 1px 1px 0 rgba(255,255,255,0.6);
+
+  cursor: pointer;
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.image-control-btn:hover {
+  transform: translateY(-4px) scale(1.04);
+  filter: brightness(1.12) drop-shadow(0 8px 8px rgba(0,0,0,0.35));
+}
+
+.image-control-btn span {
+  position: relative;
+  top: -2px;
+}
+
+.bmo-about-panel {
+  height: 38vh !important;
+  background: #f7e3b0;
+  border-top: 6px solid #5b3218;
+  color: #3b2412;
+}
+
+#gui-container {
+  position: fixed;
+  top: 90px;
+  right: 15px;
+  z-index: 1000;
+}
+
+.bmo-footer {
+  position: relative;
+  z-index: 30;
+  background: rgba(247, 227, 176, 0.92);
+  border-top: 5px solid #5b3218;
+  color: #3b2412;
+  font-weight: bold;
+}
+
+.footer-icon-link {
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  text-decoration: none;
+  background: #5b3218;
+  border: 3px solid #3b2412;
+  box-shadow: 0 5px 0 #2a160c;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.footer-icon-link img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.footer-icon-link:hover {
+  transform: translateY(-4px);
+  filter: brightness(1.12);
+}
+
+.candy-footer {
+  background:
+    radial-gradient(circle at 12% 30%, rgba(255,255,255,0.65) 0 8px, transparent 9px),
+    radial-gradient(circle at 28% 70%, rgba(255,105,180,0.45) 0 10px, transparent 11px),
+    radial-gradient(circle at 78% 35%, rgba(255,255,255,0.55) 0 7px, transparent 8px),
+    radial-gradient(circle at 90% 75%, rgba(255,105,180,0.4) 0 11px, transparent 12px),
+    rgba(255, 174, 213, 0.94);
+
+  border-top: 5px solid #b83280;
+  color: #5b123e;
+}
+.candy-footer .footer-icon-link {
+  background: #ffe1f0;
+  border: 3px solid #b83280;
+  box-shadow: 0 5px 0 #7a1f55;
+}
+
+.candy-footer .footer-icon-link:hover {
+  filter: brightness(1.08) saturate(1.2);
+}
+
+.menu-tile {
+  position: relative;
+  width: 100%;
+  height: 95px;
+  margin-bottom: 16px;
+  padding: 0 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 3px solid #3b2412;
+  border-radius: 22px;
+  overflow: hidden;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  color: #fff3c4;
+  text-decoration: none;
+  font-weight: 900;
+  text-align: center;
+
+  box-shadow: 0 7px 0 #2a160c;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.menu-tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      rgba(35, 18, 8, 0.55),
+      rgba(35, 18, 8, 0.72)
+    );
+
+  z-index: 1;
+}
+
+.menu-tile span {
+  position: relative;
+  z-index: 2;
+  font-size: 1.15rem;
+  letter-spacing: 0.5px;
+  text-shadow: 2px 2px 0 #000;
+}
+
+.menu-tile:hover {
+  transform: translateY(-4px);
+  filter: brightness(1.1);
+  color: #fff3c4;
+}
+
+.menu-tile:hover::before {
+  background:
+    linear-gradient(
+      rgba(35, 18, 8, 0.35),
+      rgba(35, 18, 8, 0.55)
+    );
+}
+
+.menu-tile-button {
+  cursor: pointer;
+}
+
+
+.menu-land {
+  background-image: url("assets/images/LandofOOOmenu.png");
+}
+
+.menu-candy {
+  background-image: url("assets/images/CandyKingdomMenu.png");
+}
+
+.menu-cragdor {
+  background-image: url("assets/images/MountCragdorMenu.png");
+}
+
+.menu-bmo {
+  background-image: url("assets/images/BMOMenu.jpeg");
+}
+
+.candy-body {
+  background-image: url("assets/BGs/CandyHouses.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.candy-body .image-control-btn {
+  background-image: url("assets/images/Candypic.png");
+}
+
+.menu-treehouse {
+  background-image: url("assets/images/TreehouseMenu.png");
+}
+
+.menu-peppermint {
+  background-image: url("assets/images/PeppermintbutlerMenu.png");
+}
+
+.cragdor-body {
+  background-image: url("assets/BGs/Dungeon.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.cragdor-body .image-control-btn {
+  background-image: url("assets/images/Key-Per.png");
+  width: 400px;
+  height: 180px;
+  position: relative;
+  top: -30px;
+}
+.menu-enchiridion {
+  background-image: url("assets/images/ench.png");
+}
+
+.enchiridion-about-panel {
+  height: 38vh !important;
+  background: #d8c49a;
+  border-top: 6px solid #3d2b18;
+  color: #2a1b0c;
+}
+
+.cragdor-footer {
+  background:
+    radial-gradient(circle at 12% 35%, rgba(255, 224, 130, 0.45) 0 8px, transparent 9px),
+    radial-gradient(circle at 82% 70%, rgba(255, 170, 70, 0.35) 0 12px, transparent 13px),
+    linear-gradient(90deg, rgba(39, 31, 25, 0.96), rgba(94, 68, 42, 0.96));
+  border-top: 5px solid #d1a85c;
+  color: #ffe7b3;
+}
+
+.cragdor-footer .footer-icon-link {
+  background: #2a1b0c;
+  border: 3px solid #d1a85c;
+  box-shadow: 0 5px 0 #120b04;
+}
+
+.cragdor-footer .footer-icon-link:hover {
+  filter: brightness(1.15) saturate(1.15);
 }
